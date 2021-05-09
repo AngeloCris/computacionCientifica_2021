@@ -1,0 +1,209 @@
+---
+title: "Laboratorio Semana"
+author: "Angelo AC"
+date: "19-04-2021"
+output: html_document
+---
+
+# Matrices y arrays
+
+- Vectores muldimensionales. Solo contienen elementos de una misma clase (semejante a vector)
+
+- Tiene dimensiones (largo - alto)
+
+- Las matrices son caso especial de arrays
+
+- Los arrays pueden tener números arbitrario de dimensiones
+
+# Creación de matrices
+
+La función matrix permite crear matrices. Esta función acepta dos argumentos `nrow` y `ncol`
+
+```{r}
+matrix(1:12, 3, 4)
+matrix(1:12, nrow = 3, ncol = 4)
+matrix(1:12)
+```
+
+Otro procedemiento para matrices es la unión a traves de vectores `cbind()` y `rbind()`
+
+```{r}
+vector1 <- 1:4
+vector2 <- 5:8
+vector3 <- 9:12
+vector4 <- 13:16
+```
+
+```{r}
+rbind(vector1,
+      vector2,
+      vector3,
+      vector4)
+
+cbind(vector1,
+      vector2,
+      vector3,
+      vector4)
+
+```
+
+## Propiedades de las matrices
+
+Solo pueden tener un tipo de dato.
+
+Dos matrices A y B solo podrán ser multiplicadas si el número de columnas de A coincide con el número de filas de la matriz B. Por ejemplo:
+
+```{r}
+mi_matriz1 <- matrix(1:12, nrow = 4, ncol = 3)
+mi_matriz2 <- matrix(1:30, nrow = 3, ncol = 10)
+
+mi_matriz1 %*% mi_matriz2
+mi_matriz2 %*% mi_matriz1
+
+```
+
+```{r}
+mi_matriz1
+dim(mi_matriz1)
+dim(mi_matriz2)
+
+```
+## Manejando valores dentro mi matriz
+
+Podemos extraer los valores de una matriz usando el símbolo de corchete []. Por ejemplo: 
+
+```{r}
+mi_matriz <- matrix(1:9, nrow = 3, ncol = 3)
+```
+
+Como seleccionados los valores centrales de la matriz, es decir los valores de 2, 5, y 8.
+
+```{r}
+mi_matriz[2,]
+mi_matriz[2, 1:3]
+mi_matriz[2, c(1,2,3)]
+```
+
+# Dataframes
+
+Son estructuras de datos de dos dimensiones. Pueden contener datos de diferentes tipos o clases, por tanto son heterógeneas. Esta estructura es la más usada para realizar análisis de datos.
+
+Por ejemplo
+
+```{r}
+iris
+head(iris, 2)
+names(iris)
+```
+
+
+```{r}
+iris[,1]
+iris$Sepal.Length
+```
+
+Para crear un dataframe usamos la función `data.frame`
+
+```{r}
+misDatos <- 
+  data.frame(
+    "entero" = 1:4,
+    "factor" = letters[1:4],
+    "numero" = c(1.2, 3.4, 4.5, 5.6),
+    "cadena" = as.character(letters[1:4])
+  )
+misDatos
+```
+Dimensiones
+
+```{r}
+length(misDatos)
+dim(misDatos)
+names(misDatos)
+class(misDatos)
+
+```
+
+## Manejo de dataframe
+
+```{r}
+mtcars
+iris
+```
+
+
+```{r}
+
+mtcars[3,]
+mtcars[1:5,]
+mtcars[c(2, 4), ]
+mtcars[mtcars$cyl > 6,]
+
+mtcars[mtcars$cyl >= 6 & mtcars$cyl <= 8,]
+
+```
+
+
+# Solución test
+
+
+
+```{r}
+-4:4
+seq(from= -4, to =4, by=1)
+c(-4:-1, 1:4)
+```
+
+```{r}
+A <- 
+  matrix(c(2,2,3,4,6,8,
+       rep(1, 6),
+       -1, -4, 6, 8, -5, -10), nrow =3, ncol = 6, byrow = T)
+       
+A[c(1,3), 2:4]
+A[c(1,2),2:3]
+
+mtcars
+iris
+```
+
+
+
+```{r}
+v1 <- matrix(1, nrow = 1, ncol = 2)
+v2 <- matrix(1, nrow = 2, ncol = 1)
+
+dim(v2 %*% v1)
+```
+
+```{r}
+A
+```
+
+
+```{r}
+A
+
+A[2,c(1,3)]
+```
+```{r}
+iris
+table(iris$Species, iris$Sepal.Length)
+
+```
+
+```{r}
+getwd()
+library(tidyverse)
+g1 <- read.table("worms.txt", header = T)
+
+g1[2:3,2]
+
+table(g1$Vegetation, g1$Damp)[1:5,1:2]
+
+```
+
+
+
+
+

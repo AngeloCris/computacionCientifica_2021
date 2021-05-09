@@ -1,0 +1,270 @@
+---
+title: "Laboratorio sem 4"
+author: "AAC"
+date: "19-04-2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Matrices y arrays
+
+- Vectores multidimensionales. Solo contienen elementos de una misma clase (semejante al vector)
+
+- Tiene dimensiones (largo - alto)
+
+- Las matrices son un caso especial de arrays
+
+- Los arrays pueden tener número arbitrario de dimensiones (cubos, etc)
+
+## Creación de matrices
+
+La función matrix permite crear matrices. Esta función acepta dos argumentos: `ncol`, `nrow` que especifica el número de columnas deseados y filas, respectivamente.
+
+```{r}
+matrix(1:12)
+matrix(1:12, nrow = 3, ncol = 4)
+matrix(1:12, nrow = 4, ncol = 3)
+```
+
+Si no se especifica el llenado de los datos en la matriz, estos se acomodarán de arriba a abajo y de izquierda a derecha hasta.
+
+Otro procedimiento para crear matrices es la unión de vectores con las función `cbind()` y `rbind()`. Por ejemplo:
+
+```{r}
+vector_1 <- 1:4
+vector_2 <- 5:8
+vector_3 <- 9:12
+vector_4 <- 13:16
+```
+
+Usando `rbind()`
+
+```{r}
+matriz <- rbind(vector_1, 
+                vector_2,
+                vector_3,
+                vector_4)
+matriz
+```
+
+```{r}
+matriz <- cbind(vector_1,
+                vector_2,
+                vector_3,
+                vector_4)
+matriz
+```
+
+## Propiedades de las matrices
+
+Solo pueden tener un tipo de dato. Su clase es igual a matriz (matrix) o array según corresponda.
+
+```{r}
+mi_matriz <- matrix(1:10)
+class(mi_matriz)
+```
+Para conocer el número de dimensiones de una matriz podemos usar la función `dim()`
+
+```{r}
+mi_matriz <- matrix(1:12, nrow = 4, ncol = 3)
+mi_matriz
+dim(mi_matriz)
+```
+
+Las aplicaciones aritméticas son vectorizadas al aplicarlas a una matriz. La operación es aplicada a cada uno de los elementos de la matriz
+
+```{r}
+mi_matriz <- matrix(1:9, nrow = 3, ncol = 3)
+mi_matriz
+```
+
+### Suma, multiplicación y potencia
+
+```{r}
+mi_matriz + 1
+mi_matriz * 2
+mi_matriz ^ 3
+```
+
+Podemos usar la función `t` para transponer una matriz
+
+```{r}
+matriz <- matrix(1:6, nrow = 3)
+matriz
+t(matriz)
+```
+
+Observamos que las columnas se volvieron filas.
+
+### Multiplicación de matrices:
+
+Dos matrices A y B solo podrán ser multiplicadas si el número de columnas de la matriz A coincide con el número de filas de la matriz B. Por ejemplo:
+
+```{r}
+mi_matriz1 <- matrix(1:12, nrow = 4, ncol = 3)
+mi_matriz2 <- matrix(1:30, nrow = 3, ncol = 10)
+```
+
+```{r}
+mi_matriz1 %*% mi_matriz2
+```
+
+Si realizo la misma operación pero ahora en el orden B x A ¿se pueden multiplcar?
+
+```{r}
+mi_matriz2 %*% mi_matriz1 #Error. ¿alguna idea?
+dim(mi_matriz2)
+dim(mi_matriz1) #Las matrices no son conmutables
+```
+
+## Manejando valores dentro de matriz
+
+Podemos extraer los valores de una matriz usando el ya conocido símbolo de corchete []. Por ejemplo:
+
+```{r}
+mi_matriz <- matrix(1:9, nrow = 3, ncol = 3)
+mi_matriz
+```
+Cómo seleccionamos solo los valores centrales de la matriz, es decir los valores 2, 5 y 8. Existen tres formas:
+
+```{r}
+mi_matriz[2,] #Primer elemento extrae las filas
+mi_matriz[2, 1:3] # Segundo elemento, extrae las columnas
+mi_matriz[2, c(1,2,3)]
+```
+
+mi_matriz[2,]
+
+# Dataframes
+
+Son estructuras de datos de dos dimensiones. Pueden contener datos de diferentes tipos o clases, por tanto son heterogéneas. Esta estructura es la más usada para realizar análisis de datos.
+
+Podemos decir que los dataframes es una versión más flexible que las matrices. Mientra que en un matriz todos los datos deben ser del mismo tipo, los de un dataframe admiten datos distintos.
+
+Por ejemplo, observemos la base de datos de flores precargada en R y nominada como `iris`
+
+```{r}
+iris
+head(iris)
+```
+
+En este caso observamos que las columnas son variables con los rasgos de cada flor: largo y ancho de sépalo, largo y ancho de pétalo y especie.
+
+Para crear un data frame usamos la función `data.frame`
+
+```{r}
+misDatos <- 
+  data.frame(
+  "entero" = 1:4,
+  "factor" = letters[1:4],
+  "numero" = c(1.2, 3.4, 4.5, 5.6),
+  "cadena" = as.character(letters[1:4])
+)
+
+misDatos
+```
+
+Para determinar las dimensiones de mi dataframe usamos la función `dim()` usada anteriormente para determinar las dimensiones de una matriz
+
+```{r}
+dim(misDatos)
+```
+
+El largo de un dataframe se puede obtener con la función `length()`
+
+```{r}
+length(misDatos)
+```
+El nombre de las variables del dataframe pueden ser obtenidos con la función `names()`
+
+```{r}
+names(misDatos)
+```
+
+La clase de un dataframe puede ser obtenido con la función ya conocida `class()`
+
+
+## manejando dataframe
+
+Usaremos la base de datos precargada en R como `mtcars` el cual refleja el consumo de combustible y otros 10 aspectos del diseño y rendimiento de 32 modelos de autos.
+
+```{r}
+?mtcars
+class(mtcars)
+```
+
+Extrayendo filas y columnas específicas a travéz de indexaciones:
+
+```{r}
+#Solo queremos ver las características del auto Datsun 710. ¿Cómo extraemos esa fila?
+mtcars[3,] #Primer elemento son las filas, el 2do son las column
+mtcars
+
+#Queremos ver las características de los 5 primeros autos ¿Cómo extraemos las fila?
+mtcars[1:5,]
+
+#Queremos extraer solo las características del autom Maxda RX4 Wag y Hornet Sportabout ¿que haríamos?
+mtcars[c(2,5),]
+
+#Queremos extraer solo las características hp y drat del autom Maxda RX4 Wag y Hornet Sportabout ¿que haríamos?
+mtcars[c(2,5), c(4,5)]
+
+#Queremos extraer solo los valores de cyl de los autos Mazda RX4 Wag y Datsun 710 ¿cómo lo hacemos?
+mtcars
+mtcars[c(2,3), 2] #¿que obtenemos?
+class(mtcars[c(2,3), 2]) #es un vector del tipo numérico
+
+#Queremos extraer todos los autos que tengan un valor menor a 8 cyl ¿cómo lo hacemos?
+mtcars[mtcars$cyl < 8,]
+View(mtcars[mtcars$cyl < 8,])
+
+#Queremos extraer todos los autos que tengan un valor entre 6 y 8 cyl ¿cómo lo hacemos?
+mtcars[mtcars$cyl >= 6 & mtcars$cyl <= 8,]
+```
+
+```{r}
+datosLetras <- 
+  data.frame("letras" = sample(letters, 100, replace = T),
+           "valores" = sample(1:20, 20, replace = T ))
+table(datosLetras$letras, datosLetras$valores)
+```
+
+
+#Solución examen
+
+Pregunta 2
+
+```{r}
+c(-4:-1, 1:4)
+```
+
+Pregunta 4
+Considerando la siguiente matriz
+
+```{r}
+a <- matrix(c(2,2,3,4,6,8, rep(1,6),-1,-4,6,8,-5,-10),
+            ncol = 6,
+            nrow = 3,
+            byrow = T)
+a
+a[c(1,3), 2:4]
+```
+
+Pregunta 8
+
+```{r}
+m1 <- matrix(c(1,2,2,1), ncol = 2, nrow = 2, byrow = T)
+m2 <- matrix(1, ncol = 2, nrow = 3)
+m3 <- matrix(1, ncol = 3, nrow = 2)
+```
+
+```{r}
+m1 %*% m2
+
+```
+
+
+
