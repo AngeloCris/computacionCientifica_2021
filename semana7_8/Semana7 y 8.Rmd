@@ -244,3 +244,13 @@ dataProyectoExcluidos <- dataProyectoWithoutNA[which(dataProyectoWithoutNA$v6 ==
 list(dataProyecto, dataProyectoExcluidos, dataProyectoMachos)
 
 ```
+
+
+```{r}
+
+x <- c(1, 2, -Inf, NaN, NaN, NA)
+  
+# Calling is.nan() function
+is.nan(x) #Permite encontrar los elementos NaN de un vector
+```
+
