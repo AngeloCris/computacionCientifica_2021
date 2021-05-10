@@ -144,12 +144,12 @@ head(dataProyecto)
 ```
 
     ##   v1  v2 v3  v4 v5    v6
-    ## 1  1 E_4  0 105 m2 FALSE
-    ## 2  2 E_1  0  93 m4 FALSE
-    ## 3  3 E_1  0  95 m5 FALSE
-    ## 4  4 E_1  0 102 m1 FALSE
-    ## 5  5 E_2  0  82 m1 FALSE
-    ## 6  6 E_3  0  90 m5  TRUE
+    ## 1  1 E_5  0 104 m1  TRUE
+    ## 2  2 E_4  1 115 m3 FALSE
+    ## 3  3 E_3  0  94 m3 FALSE
+    ## 4  4 E_3  0  99 m3 FALSE
+    ## 5  5 E_5  0 110 m5 FALSE
+    ## 6  6 E_1  0 113 m2 FALSE
 
 ``` r
 #Reemplazar registros al azar con NA
