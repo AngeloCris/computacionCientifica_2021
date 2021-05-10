@@ -25,7 +25,7 @@ Ejemplo 1
 Problema: Intentar describir el doble de un número ( n x 2) mediante
 diagramas de flujo
 
-<img src="imagenes/diagramEjem1.PNG" width="80%" style="display: block; margin: auto;" />
+<img src="imagenes/diagramEjem1.PNG" width="30%" style="display: block; margin: auto;" />
 
 Ejemplo 2
 
@@ -144,12 +144,12 @@ head(dataProyecto)
 ```
 
     ##   v1  v2 v3  v4 v5    v6
-    ## 1  1 E_1  0  96 m2 FALSE
-    ## 2  2 E_3  1 104 m1 FALSE
-    ## 3  3 E_1  0  92 m4 FALSE
-    ## 4  4 E_3  1 107 m5 FALSE
-    ## 5  5 E_3  1 101 m3 FALSE
-    ## 6  6 E_2  0 103 m2 FALSE
+    ## 1  1 E_4  0 108 m5 FALSE
+    ## 2  2 E_1  0  99 m5 FALSE
+    ## 3  3 E_4  0 108 m4 FALSE
+    ## 4  4 E_5  0  76 m1 FALSE
+    ## 5  5 E_1  1 103 m5 FALSE
+    ## 6  6 E_2  0  82 m2 FALSE
 
 ``` r
 #Reemplazar registros al azar con NA

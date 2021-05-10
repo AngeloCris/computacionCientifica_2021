@@ -45,7 +45,7 @@ Ejemplo 1
 
 Problema: Intentar describir el doble de un número ( n x 2) mediante diagramas de flujo
 
-```{r}
+```{r out.width="30%"}
 knitr::include_graphics("imagenes/diagramEjem1.PNG")
 ```
 
@@ -53,7 +53,7 @@ Ejemplo 2
 
 Problema: Pedir la edad de una persona y decir si es mayor de edad o no
 
-```{r}
+```{r }
 knitr::include_graphics("imagenes/diagramEjem2.PNG")
 ```
 
@@ -62,7 +62,7 @@ Ejemplo 3
 Problema: Dado un número positivo, disminuir el valor de ese número hasta llegar a cero.
 
 
-```{r}
+```{r }
 knitr::include_graphics("imagenes/diagramEjem3.PNG")
 ```
 
