@@ -4,5 +4,5 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of computacionCientifica_2021 is to ...
+Clases prácticas del curso de computación científica 2021-1
 
