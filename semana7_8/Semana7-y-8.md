@@ -111,6 +111,23 @@ Construya un dataframe con los siguientes 6 campos y 2000 registros.
 #### Solución
 
 ``` r
+estacion <- paste(rep("E",5),
+                  seq(1, 5, 1),
+                  sep = "_")
+
+distNormalLimits <- 
+  function(n, lw, up, nnorm, m, sd) {
+  a <- rnorm(nnorm, m, sd)
+  a <- round(a[a >= lw & a <= up],0)
+  
+  if (length(a) >= n) {
+    return(sample(a, n))
+  }
+  stop(simpleError("No hay suficientes valores para muestrear. Intenta aumentar nnorm"))
+  }
+```
+
+``` r
 #Creando el dataframe
 dataProyecto <- 
   data.frame(
@@ -124,7 +141,7 @@ dataProyecto <-
     v4 = distNormalLimits(2000, #Distr. normal
                           70,
                           140,
-                          10000,
+                          3000,
                           100,
                           10),
     v5 = sample(c("m1", #Muestreadores m5 trabajo el doble
@@ -144,12 +161,12 @@ head(dataProyecto)
 ```
 
     ##   v1  v2 v3  v4 v5    v6
-    ## 1  1 E_5  0 112 m5 FALSE
-    ## 2  2 E_3  0  78 m1 FALSE
-    ## 3  3 E_5  1 112 m1 FALSE
-    ## 4  4 E_4  0 109 m1 FALSE
-    ## 5  5 E_1  0 108 m5 FALSE
-    ## 6  6 E_1  1  91 m1 FALSE
+    ## 1  1 E_3  0  93 m5 FALSE
+    ## 2  2 E_5  1  85 m3 FALSE
+    ## 3  3 E_1  0  95 m4 FALSE
+    ## 4  4 E_5  0  74 m5  TRUE
+    ## 5  5 E_2  0 107 m1 FALSE
+    ## 6  6 E_4  0  90 m4 FALSE
 
 ``` r
 #Reemplazar registros al azar con NA

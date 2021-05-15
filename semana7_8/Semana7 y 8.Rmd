@@ -132,7 +132,7 @@ Construya un dataframe con los siguientes 6 campos y 2000 registros.
 #### Solución
 
 
-```{r}
+```{r echo=TRUE}
 estacion <- paste(rep("E",5),
                   seq(1, 5, 1),
                   sep = "_")
@@ -164,7 +164,7 @@ dataProyecto <-
     v4 = distNormalLimits(2000, #Distr. normal
                           70,
                           140,
-                          10000,
+                          3000,
                           100,
                           10),
     v5 = sample(c("m1", #Muestreadores m5 trabajo el doble
@@ -181,6 +181,7 @@ dataProyecto <-
                 prob = c(0.9, 0.1)))
 
 head(dataProyecto)
+
 
 #Reemplazar registros al azar con NA
 random_na <- sample(1:2000, 300)
@@ -203,6 +204,7 @@ table(is.na(dataProyecto))
 which(is.na(dataProyecto))
 
 #Cuales son
+dataProyecto
 dataProyecto[!complete.cases(dataProyecto),]
 
 #Total de NA
@@ -242,7 +244,6 @@ dataProyectoExcluidos <- dataProyectoWithoutNA[which(dataProyectoWithoutNA$v6 ==
 
 #Construya una lista que incluya el dataframe inicial, los datos excluidos de medición, y la base de datos depurada
 list(dataProyecto, dataProyectoExcluidos, dataProyectoMachos)
-
 ```
 
 
