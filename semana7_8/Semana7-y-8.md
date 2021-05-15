@@ -144,12 +144,12 @@ head(dataProyecto)
 ```
 
     ##   v1  v2 v3  v4 v5    v6
-    ## 1  1 E_5  0 104 m1  TRUE
-    ## 2  2 E_4  1 115 m3 FALSE
-    ## 3  3 E_3  0  94 m3 FALSE
-    ## 4  4 E_3  0  99 m3 FALSE
-    ## 5  5 E_5  0 110 m5 FALSE
-    ## 6  6 E_1  0 113 m2 FALSE
+    ## 1  1 E_5  0 112 m5 FALSE
+    ## 2  2 E_3  0  78 m1 FALSE
+    ## 3  3 E_5  1 112 m1 FALSE
+    ## 4  4 E_4  0 109 m1 FALSE
+    ## 5  5 E_1  0 108 m5 FALSE
+    ## 6  6 E_1  1  91 m1 FALSE
 
 ``` r
 #Reemplazar registros al azar con NA
@@ -172,6 +172,7 @@ table(is.na(dataProyecto))
 which(is.na(dataProyecto))
 
 #Cuales son
+dataProyecto
 dataProyecto[!complete.cases(dataProyecto),]
 
 #Total de NA
@@ -212,3 +213,5 @@ dataProyectoExcluidos <- dataProyectoWithoutNA[which(dataProyectoWithoutNA$v6 ==
 #Construya una lista que incluya el dataframe inicial, los datos excluidos de medición, y la base de datos depurada
 list(dataProyecto, dataProyectoExcluidos, dataProyectoMachos)
 ```
+
+    ## [1] FALSE FALSE FALSE  TRUE  TRUE FALSE
