@@ -15,12 +15,11 @@ knitr::opts_chunk$set(fig.align = "center",
 
 # Operadores y Estructuras de control (Sem 8 y 9)
 
-Nos permite controlar la manera en cómo se ejecuta nuestro código. 
+Nos permite controlar la manera en cómo se ejecuta nuestro código (establecen **condicionales**). 
+
 Las estructuras de control más usadas en R son las siguiente:
 
-Las estructuras de control establecen **condicionales** en nuestros códigos.
-
-```{r }
+```{r echo=FALSE}
 knitr::include_graphics("imagenes/estructuraControl.PNG")
 ```
 
@@ -86,8 +85,6 @@ if (10 > 15) {
   "Falso"
 }
 ```
-
-### Usando if y else
 
 Para ilustrar el uso de *if* y *else* definiremos una función que calcule el promedio de calificaciones de un estudiante y, dependiendo de la calificación calculada, nos devuelva un mensaje específico.
 
@@ -187,13 +184,105 @@ sexo <- ifelse(sexo == 0, "hembra", "macho")
 sexo
 ```
 
+##  Uso de condicionales y estructuras de control en un dataframe
 
+Recordemos que para hacer uso de las condicionales podemos hacer uso de las funciones *if*, *else*, *if else* y/o uso de indexaciones combinado con operadores lógicos y/o relacionales. (<https://github.com/AngeloCris/computacionCientifica_2021/blob/master/semana7_8/Semana7-y-8.md>).
 
-
-```{r}
-knitr::knit_exit()
+```{r results='hide'}
+datosCrangrejo <- 
+  read.table("datos/datos_cangrejos.txt",
+             sep = ",",
+             header = TRUE)
+datosCrangrejo
 ```
 
+Para determinar el total de filas de mi data frame usamos la funció *length*.
+
+```{r}
+length(datosCrangrejo$Year)
+```
+
+La base de datos muestra los registros mensuales de la longitud y sexo de un cangrejo para el periodo 2008 y 2014. En función a lo mencionado anteriormente, resolvamos lo siguiente.
+
+- Crear una columna denominada "sexo" que reemplace las categorias de la columna "sex". Considere lo siguiente 
+
+  - "F" = "female"
+
+  - "0" = "ovígera"
+
+
+```{r results='hide'}
+#Uso del ifelse
+#Para condicionales vectorizados
+datosCrangrejo$sexo <- 
+  ifelse(datosCrangrejo$Sex == "F", "Females", "Ovigera")
+```
+
+- Crear una columna denominada "estacion" que reemplace las categorías de la columna "Month". Considere lo siguiente:
+
+  - verano = 12, 1, 2
+  
+  - otoño = 3, 4, 5
+  
+  - invierno = 6, 7, 8
+  
+  - primavera = 9, 10, 11
+  
+```{r}
+datosCrangrejo$estacion <- "NA"
+datosCrangrejo$estacion[datosCrangrejo$Month %in% c(12,1,2)] <- "verano"
+datosCrangrejo$estacion[datosCrangrejo$Month %in% c(3,4,5)] <- "otoño"
+datosCrangrejo$estacion[datosCrangrejo$Month %in% c(6,7,8)] <- "invierno"
+datosCrangrejo$estacion[datosCrangrejo$Month %in% c(9,10,11)] <- "primavera"
+```
+
+- Determinar las posiciones de la categoría "primavera" y luego determinar los valores que se asocian a esas posiciones.
+
+```{r results='hide'}
+#Deseamos extraer las posiciones de las categorías que pertenecen a la estación primavera.
+which(datosCrangrejo$estacion == "primavera")
+
+#Extrayendo los valores de las variables de esta categoría
+datosCrangrejo[which(datosCrangrejo$estacion == "primavera"),]
+
+```
+
+- Extraer todos los registros de cangrejos que superan la talla media.
+
+```{r }
+media <- mean(datosCrangrejo$C_Length, na.rm = T)
+head(datosCrangrejo$C_Length > media)
+head(datosCrangrejo[datosCrangrejo$C_Length > media,])
+
+```
+
+- Extraer todos los registros de cangrejos hembras que superan la talla media.
+
+```{r results='hide'}
+datosCrangrejo$C_Length > media
+which(datosCrangrejo$C_Length > media & datosCrangrejo$sexo == "Females")
+
+head(datosCrangrejo[which(datosCrangrejo$C_Length > media & datosCrangrejo$sexo == "Females"),])
+```
+
+- Asumamos que la mínima talla de extracción de la especie de cangrejo sea 110 mm. Crear una columna que identifique si la longitud registrada supera o no la talla mínima.
+
+```{r }
+tmin <- 110
+datosCrangrejo$lengthMin <- "NA"
+datosCrangrejo$lengthMin <- ifelse(datosCrangrejo$C_Length > 110, ">tmin", "<tmin")
+head(datosCrangrejo)
+
+```
+
+## for
+
+
+## while
+
+```{r echo=FALSE}
+knitr::knit_exit()
+```
 
 ```{r}
 x <- c(2,3,4)
@@ -204,4 +293,22 @@ if (length(x) > length(y)) {
 }
 
 ```
+
+```{r}
+notas <- c(5,3,4,6,7,2.5,4.5,3.8)
+ca = 0
+cr = 0
+
+for (n in 1:length(notas)) {
+  if (notas[n] >= 4) {
+    ca = ca + 1 }
+    else { 
+      cr = cr + 1} 
+  }
+
+
+```
+
+
+
 

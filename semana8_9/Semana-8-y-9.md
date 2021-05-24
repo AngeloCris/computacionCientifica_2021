@@ -227,6 +227,18 @@ ifelse(numeros %% 2 == 0 & numeros %% 3 == 0,
     ## [11] "No divisible" "Divisible"    "No divisible" "No divisible" "No divisible"
     ## [16] "No divisible" "No divisible" "Divisible"    "No divisible" "No divisible"
 
+Conocer esta función puede ser particularmente útil para recodificar
+datos. Por ejemplo:
+
+``` r
+sexo <- c(0, 1, 0, 0, 0, 0, 0, 1, 1, 0)
+sexo <- ifelse(sexo == 0, "hembra", "macho")
+sexo
+```
+
+    ##  [1] "hembra" "macho"  "hembra" "hembra" "hembra" "hembra" "hembra" "macho" 
+    ##  [9] "macho"  "hembra"
+
 ``` r
 knitr::knit_exit()
 ```
