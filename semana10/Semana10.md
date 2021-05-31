@@ -155,16 +155,16 @@ for (i in 1:10) {
 }
 ```
 
-    ## [1] 0.0941988
-    ## [1] 1.559331
-    ## [1] 5.744269
-    ## [1] 0.8699997
-    ## [1] 0.02427478
-    ## [1] 0.01351523
-    ## [1] 0.06031369
-    ## [1] 0.5343345
-    ## [1] 0.1545069
-    ## [1] 0.1041309
+    ## [1] 0.6341432
+    ## [1] 2.443975
+    ## [1] 1.043532
+    ## [1] 0.8182331
+    ## [1] 0.003327914
+    ## [1] 0.8078869
+    ## [1] 1.911062
+    ## [1] 0.01207042
+    ## [1] 0.8487465
+    ## [1] 0.119045
 
 ## 1.2 while
 
@@ -188,16 +188,16 @@ limite <- 5
 inicio <- 0
 
 while (inicio < limite) {
-  print("Cuando el valor de inicio sea mayor a 5, detener operación")
+  print("Cuando el valor de inicio sea mayor o igual a 5, detener operación")
   inicio <- inicio + 1
 }
 ```
 
-    ## [1] "Cuando el valor de inicio sea mayor a 5, detener operación"
-    ## [1] "Cuando el valor de inicio sea mayor a 5, detener operación"
-    ## [1] "Cuando el valor de inicio sea mayor a 5, detener operación"
-    ## [1] "Cuando el valor de inicio sea mayor a 5, detener operación"
-    ## [1] "Cuando el valor de inicio sea mayor a 5, detener operación"
+    ## [1] "Cuando el valor de inicio sea mayor o igual a 5, detener operación"
+    ## [1] "Cuando el valor de inicio sea mayor o igual a 5, detener operación"
+    ## [1] "Cuando el valor de inicio sea mayor o igual a 5, detener operación"
+    ## [1] "Cuando el valor de inicio sea mayor o igual a 5, detener operación"
+    ## [1] "Cuando el valor de inicio sea mayor o igual a 5, detener operación"
 
 Tener cuidado con crear bucles infinitos! Si se ejecuta el While con una
 condición que nunca termine, este no se detendrá.
