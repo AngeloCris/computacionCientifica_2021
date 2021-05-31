@@ -1,8 +1,10 @@
 ---
-title: "Semana 8 y 9"
+title: "Semana 10"
 output: 
   bookdown::github_document2:
     toc: true 
+  #bookdown::pdf_document2: default
+
 ---
 
 ```{r echo=FALSE}
@@ -35,6 +37,7 @@ La estructura de un la función *if* es la siguiente
 #if (condicion) {
 #  proceso_si_se_cumple_condicion
 #}
+
 ```
 
 Si la condición es verdadera, entonces se realiza la operación. En caso contrario, no se realiza la operación. Veamos algunos ejemplos:
@@ -54,7 +57,7 @@ if (10 > 15) {
 
 la función *else* complementa a *if*, es decir, le asigna un proceso siempre en cuando la condición inicial no se cumpla. En otras palabras, un *if* con *else* es la manera de decirle a R:
 
-- **SI** esta condición es cierta, **ENTONCES** haz estas operaciones.**DE OTRO MODO** haz estas otras operaciones
+- **SI** esta condición es cierta, **ENTONCES** haz estas operaciones.**DE OTRO MODO** haz estas otras operaciones.
 
 La estructura de in **if** con **else** es el siguiente:
 
@@ -90,20 +93,20 @@ Para ilustrar el uso de *if* y *else* definiremos una función que calcule el pr
 
 ```{r}
 promedio <- 
-  function(calificacion){
-    mean(calificacion)
+  function(nota){
+    mean(nota)
   }
 
 promedio(c(5,8,9,6,5))
 ```
-Ahora realizaremos un proceso de tal forma que la función nos muestre si un estudiante ha aprobado o no. Si asumimos que un estudiante necesita obtener 5 o más en promedio par aprobar podemos decir:
+Ahora realizaremos un proceso de tal forma que la función nos muestre si un estudiante ha aprobado o no. Si asumimos que un estudiante necesita obtener 5 o más en promedio para aprobar podemos decir:
 
-- **SI** el promedio de un estudiante es igual o mayor a 5, **ENTONCES** mostrar "Aprobado", **DE OTRO MODO**, mostrar "Reprobado.
+- **SI** el promedio de un estudiante es igual o mayor a 5, **ENTONCES** mostrar "Aprobado", **DE OTRO MODO**, mostrar "Reprobado".
 
 ```{r}
 promedio <- 
-  function(calificaciones) {
-    media <- mean(calificaciones)
+  function(notas) {
+    media <- mean(notas)
     
     if (media >= 5) {
       print("Aprobado")
@@ -124,7 +127,7 @@ promedio(c(3,4,4,4,5,3))
 
 ## If else
 
-La función *ifelse()* permite vectoriza if, else. En lugar de escribir una línea de código para cada comparación, podemos usar una sola llamada a esta función, que se aplicará a todos los elementos de un vector.
+La función *ifelse()* permite vectorizar if, else. En lugar de escribir una línea de código para cada comparación, podemos usar una sola llamada a esta función, que se aplicará a todos los elementos de un vector.
 
 Si intentamos usar if else con un vector, se nos mostrará una advertencia:
 
@@ -141,13 +144,13 @@ Por el contrario, con *ifelse* le indicamos que la condición debe de cumplirse 
 
 - un vector
 
-- caracter que indique que mostrar si la condición se cumple
+- un valor que indique qué mostrar si la condición se cumple
 
-- caracter que indique que mostrar si la condición se cumple
+- un valor que indique qué mostrar si la condición no se cumple
 
 ```{r}
 vector <- 1:10
-ifelse(vector > 5, "valor_si_TRUE", "valor_si_FALSE")
+ifelse(vector > 5, "TRUE", "FALSE")
 
 ```
 
@@ -159,7 +162,7 @@ ifelse(edad >= 15, "TRUE", "FALSE")
 ```
 
 ```{r}
-#Determinar cual de los números del 1 al 60 son pares y cuales impares ¿que se debe cumpli?
+#Determinar cual de los números del 1 al 60 son pares y cuales impares ¿que se debe cumplir?
 
 numeros <- 1:60
 ifelse(numeros %% 2 == 0, "par", "impar")
@@ -196,15 +199,16 @@ datosCrangrejo <-
 datosCrangrejo
 ```
 
-Para determinar el total de filas de mi data frame usamos la funció *length*.
+Para determinar el total de filas de mi data frame usamos la función *length*.
 
 ```{r}
+attach(datosCrangrejo)
 length(datosCrangrejo$Year)
 ```
 
 La base de datos muestra los registros mensuales de la longitud y sexo de un cangrejo para el periodo 2008 y 2014. En función a lo mencionado anteriormente, resolvamos lo siguiente.
 
-- Crear una columna denominada "sexo" que reemplace las categorias de la columna "sex". Considere lo siguiente 
+- Crear una columna denominada "sexo" que reemplace las categorías de la columna "sex". Considere lo siguiente 
 
   - "F" = "female"
 
@@ -214,8 +218,11 @@ La base de datos muestra los registros mensuales de la longitud y sexo de un can
 ```{r results='hide'}
 #Uso del ifelse
 #Para condicionales vectorizados
+unique(datosCrangrejo$Sex)
 datosCrangrejo$sexo <- 
   ifelse(datosCrangrejo$Sex == "F", "Females", "Ovigera")
+head(datosCrangrejo)
+table(datosCrangrejo$sexo)
 ```
 
 - Crear una columna denominada "estacion" que reemplace las categorías de la columna "Month". Considere lo siguiente:
@@ -230,10 +237,11 @@ datosCrangrejo$sexo <-
   
 ```{r}
 datosCrangrejo$estacion <- "NA"
-datosCrangrejo$estacion[datosCrangrejo$Month %in% c(12,1,2)] <- "verano"
+datosCrangrejo$estacion[datosCrangrejo$Month %in% c(12,1,2)] <- "verano" 
 datosCrangrejo$estacion[datosCrangrejo$Month %in% c(3,4,5)] <- "otoño"
 datosCrangrejo$estacion[datosCrangrejo$Month %in% c(6,7,8)] <- "invierno"
 datosCrangrejo$estacion[datosCrangrejo$Month %in% c(9,10,11)] <- "primavera"
+head(datosCrangrejo)
 ```
 
 - Determinar las posiciones de la categoría "primavera" y luego determinar los valores que se asocian a esas posiciones.
@@ -251,7 +259,9 @@ datosCrangrejo[which(datosCrangrejo$estacion == "primavera"),]
 
 ```{r }
 media <- mean(datosCrangrejo$C_Length, na.rm = T)
-head(datosCrangrejo$C_Length > media)
+
+head(which(datosCrangrejo$C_Length > media))
+head(datosCrangrejo[which(datosCrangrejo$C_Length > media),])
 head(datosCrangrejo[datosCrangrejo$C_Length > media,])
 
 ```
@@ -277,8 +287,191 @@ head(datosCrangrejo)
 
 ## for
 
+La estructura *for* permite ejecutar bucles realizando una operación para cada elemento de un conjunto de datos, es decir, hace un proceso de iteración.
+
+```{r}
+#la estructura es
+#for (variable in vector) {
+#  proceso
+#}
+```
+
+Esta estructura le dice a R:
+
+- **PARA** cada elemento **EN** un objeto, realice un proceso específico.
+ 
+Cuando observamos la estructura del bucle, la "variable" puede ser un elemento cualquiera (la podemos llamar como nosotros queramos) pero el objeto "vector" tiene que ser un objeto existente.
+
+
+### Ejemplos
+
+* Sumarle 2 unidades a cada elemento del objeto "vector" definido líneas abajo:
+
+```{r}
+vector <- 5:10
+
+vector[1] + 2
+vector[2] + 2 
+vector[3] + 2
+vector[4] + 2
+vector[5] + 2
+
+for (i in length(vector)) {
+  vector1 <- vector[i] + 2
+
+}
+
+vector1
+```
+
+* Si deseamos imprimir vectores con la siguiente forma: "El año es x", donde x es igual a 1990, 1991, 1992, ... , 2020 y 2021. Esto se podría realizar de la siguiente manera:
+
+```{r}
+print(paste("El año es", 1990))
+print(paste("El año es", 1991))
+print(paste("El año es", 1992))
+print(paste("El año es", 1993)) #asi sucesivamente
+print(paste("El año es", 2019))
+print(paste("El año es", 2020))
+print(paste("El año es", 2021))
+
+```
+
+Cuando la longitud del vector x es grande, este proceso se vuelve tedioso. En este caso se recomientda usar un loop en R para que el proceso se repita continuamente.
+
+```{r}
+for (year in 1990:2021) {
+  print(paste("El año es", year))
+}
+```
+
+* Calcular el cuadrado de los 10 primeros elementos de un vector u1
+
+```{r}
+#Vector u1
+u1 <- rnorm(30)
+print("Este loop calculará el cuadrado de los 10 primeros elementos del vector u1")
+usq <- 0
+
+for (i in 1:10) {
+  usq[i] <- u1[i] * u1[i]
+  print(usq[i])
+}
+
+
+
+```
 
 ## while
+
+Tipo de bucle que realizará un proceso **mientras** la condición propuesta sea **verdadera**.
+
+```{r}
+#while (condicion) {
+#  operaciones
+#}
+```
+
+### Ejemplos
+
+* Imprimir el siguiente mensaje "Cuando el valor de inicio sea menor a 5, detener operación" donde la variable "límite" es igual a 5 y la variable "inicio", 0.
+
+```{r}
+limite <- 5
+inicio <- 0
+
+while (inicio < limite) {
+  print("Cuando el valor de inicio sea mayor a 5, detener operación")
+  inicio <- inicio + 1
+}
+
+inicio <- 0
+
+
+```
+
+Tener cuidado con crear bucles infinitos! Si se ejecuta el While con una condición que nunca termine, este no se detendrá.
+
+```{r}
+#while (inicio < limite) {
+  #print("Cuand el valor de inicio sea menor a límite, detenerse")
+  #inicio <- inicio + 1
+#}
+```
+
+* Realizar un proceso iteración (10 veces) donde se muestre el mensaje "Este es el loop número x". Sea x el número de la iteración.
+
+```{r}
+#Crear una variable con valor 1
+inicio <- 1
+
+#Create un loop
+while (inicio <= 10) {
+  cat("Este es el loop número", inicio)
+  inicio <- inicio + 1
+  print(inicio)
+}
+
+```
+
+* Deseamos conocer el primer número entero positivo cuyo cuadrado exceda a 4000:
+
+```{r}
+#Variable de inicialización
+n <- 0
+potencia <- 0
+
+#While loop
+while (potencia <= 4000) {
+  n <- n + 1 #definiendo número entero positivo
+  potencia <- n ^ 2 #definiendo el cuadrado de ese número
+}
+
+```
+
+* Suma de dos vectores
+
+```{r}
+x <- c(1, 2, 3, 4)
+y <- c(0, 0, 5, 1)
+n <- length(x)
+i <- 0
+z <- numeric(n)
+
+while (i <= n) {
+  z[i] <- x[i] + y[i]
+  i <- i + 1
+}
+
+z
+```
+
+* Extraer un número al azar de una secuencia numérica del 1 al 10 hasta que la suma de sus elementos extraídos sea menor a 50. Indicar el número de iteraciones y la suma resultante.
+
+```{r}
+contador <- 0
+suma <- 0
+
+while (suma < 50) {
+  suma <- suma + sample(x = 1:10, size = 1)
+  contador <- contador + 1
+}
+```
+
+En clase se vió un ejemplo en donde los elementos de un vector x correspondían a conteos de animales avistados a lo largo de un transecto. Solicitaban encontrar en punto a lo largo del transecto en que el número acumulado de animales avistados es al menos 50
+
+```{r}
+x <- c(1,0,1,2,1,4,7,2,6,1,8,2,0,3,0,10,8,5,4,5,8,2,0,5,8)
+sum <- 0
+i <- 0
+
+while (sum > 50) {
+  i = i + 1
+  sum = sum + x[i]
+  print(sum)
+}
+
+```
 
 ```{r echo=FALSE}
 knitr::knit_exit()
@@ -306,9 +499,13 @@ for (n in 1:length(notas)) {
       cr = cr + 1} 
   }
 
-
 ```
 
 
+```{r}
+read.table("../")
+
+
+```
 
 
