@@ -1,0 +1,239 @@
+---
+title: "Semana 8 - 9"
+output: 
+  bookdown::github_document2:
+    toc: true 
+  #bookdown::pdf_document2: default
+
+---
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(fig.align = "center",
+                      out.width = "80%",
+                      echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# Operadores y Estructuras de control (Sem 10)
+
+## for
+
+La estructura *for* permite ejecutar bucles realizando una operación para cada elemento de un conjunto de datos, es decir, hace un proceso de iteración.
+
+```{r}
+#la estructura es
+#for (variable in vector) {
+#  proceso
+#}
+```
+
+Esta estructura le dice a R:
+
+- **PARA** cada elemento **EN** un objeto, realice un proceso específico.
+ 
+Cuando observamos la estructura del bucle, la "variable" puede ser un elemento cualquiera (la podemos llamar como nosotros queramos) pero el objeto "vector" tiene que ser un objeto existente.
+
+
+### Ejemplos
+
+* Sumarle 2 unidades a cada elemento del objeto "vector" definido líneas abajo:
+
+```{r}
+vector <- 5:10
+
+vector[1] + 2
+vector[2] + 2 
+vector[3] + 2
+vector[4] + 2
+vector[5] + 2
+
+for (i in length(vector)) {
+  vector1 <- vector[i] + 2
+
+}
+
+vector1
+```
+
+* Si deseamos imprimir vectores con la siguiente forma: "El año es x", donde x es igual a 1990, 1991, 1992, ... , 2020 y 2021. Esto se podría realizar de la siguiente manera:
+
+```{r}
+print(paste("El año es", 1990))
+print(paste("El año es", 1991))
+print(paste("El año es", 1992))
+print(paste("El año es", 1993)) #asi sucesivamente
+print(paste("El año es", 2019))
+print(paste("El año es", 2020))
+print(paste("El año es", 2021))
+
+```
+
+Cuando la longitud del vector x es grande, este proceso se vuelve tedioso. En este caso se recomientda usar un loop en R para que el proceso se repita continuamente.
+
+```{r results='hide'}
+for (year in 1990:2021) {
+  print(paste("El año es", year))
+}
+```
+
+* Calcular el cuadrado de los 10 primeros elementos de un vector u1
+
+```{r}
+#Vector u1
+u1 <- rnorm(30)
+print("Este loop calculará el cuadrado de los 10 primeros elementos del vector u1")
+usq <- 0
+
+for (i in 1:10) {
+  usq[i] <- u1[i] * u1[i]
+  print(usq[i])
+}
+
+
+
+```
+
+## while
+
+Tipo de bucle que realizará un proceso **mientras** la condición propuesta sea **verdadera**.
+
+```{r}
+#while (condicion) {
+#  operaciones
+#}
+```
+
+### Ejemplos
+
+* Imprimir el siguiente mensaje "Cuando el valor de inicio sea mayor a 5, detener operación" donde la variable "límite" es igual a 5 y la variable "inicio", 0.
+
+```{r}
+limite <- 5
+inicio <- 0
+
+while (inicio < limite) {
+  print("Cuando el valor de inicio sea mayor a 5, detener operación")
+  inicio <- inicio + 1
+}
+
+```
+
+Tener cuidado con crear bucles infinitos! Si se ejecuta el While con una condición que nunca termine, este no se detendrá.
+
+```{r}
+#while (inicio < limite) {
+#  print("Cuando el valor de inicio sea mayor a 5, detener la operación")
+#}
+```
+
+* Realizar un proceso iteración (10 veces) donde se muestre el mensaje "Este es el loop número x". Sea x el número de la iteración.
+
+```{r}
+#Crear una variable con valor 1
+inicio <- 1
+
+#Create un loop
+while (inicio <= 10) {
+  cat("Este es el loop número", inicio)
+  inicio <- inicio + 1
+  print(inicio)
+}
+
+```
+
+* Deseamos conocer el primer número entero positivo cuyo cuadrado exceda a 4000:
+
+```{r}
+#Variable de inicialización
+n <- 0
+potencia <- 0
+
+#While loop
+while (potencia <= 4000) {
+  n <- n + 1 #definiendo número entero positivo
+  potencia <- n ^ 2 #definiendo el cuadrado de ese número
+}
+
+```
+
+* Suma de dos vectores
+
+```{r}
+x <- c(1, 2, 3, 4)
+y <- c(0, 0, 5, 1)
+n <- length(x)
+i <- 0
+z <- numeric(n)
+
+while (i <= n) {
+  z[i] <- x[i] + y[i]
+  i <- i + 1
+}
+
+z
+```
+
+* Extraer un número al azar de una secuencia numérica del 1 al 10 hasta que la suma de sus elementos extraídos sea menor a 50. Indicar el número de iteraciones y la suma resultante.
+
+```{r}
+contador <- 0
+suma <- 0
+
+while (suma < 50) {
+  suma <- suma + sample(x = 1:10, size = 1)
+  contador <- contador + 1
+}
+```
+
+En clase se vió un ejemplo en donde los elementos de un vector x correspondían a conteos de animales avistados a lo largo de un transecto. Solicitaban encontrar en punto a lo largo del transecto en que el número acumulado de animales avistados es al menos 50
+
+```{r}
+x <- c(1,0,1,2,1,4,7,2,6,1,8,2,0,3,0,10,8,5,4,5,8,2,0,5,8)
+sum <- 0
+i <- 0
+
+while (sum > 50) {
+  i = i + 1
+  sum = sum + x[i]
+  print(sum)
+}
+
+```
+
+```{r echo=FALSE}
+knitr::knit_exit()
+```
+
+```{r}
+x <- c(2,3,4)
+y <- c(3,2)
+
+if (length(x) > length(y)) {
+  x[1] + y[1]
+}
+
+```
+
+```{r}
+notas <- c(5,3,4,6,7,2.5,4.5,3.8)
+ca = 0
+cr = 0
+
+for (n in 1:length(notas)) {
+  if (notas[n] >= 4) {
+    ca = ca + 1 }
+    else { 
+      cr = cr + 1} 
+  }
+
+```
+
+
+```{r}
+read.table("../")
+
+
+```
+
+
