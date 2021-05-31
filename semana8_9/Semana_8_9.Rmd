@@ -381,7 +381,7 @@ limite <- 5
 inicio <- 0
 
 while (inicio < limite) {
-  print("Cuando el valor de inicio sea mayor a 5, detener operación")
+  print("Cuando el valor de inicio sea mayor o igual a 5, detener operación")
   inicio <- inicio + 1
 }
 
