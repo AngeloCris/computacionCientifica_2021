@@ -374,7 +374,7 @@ Tipo de bucle que realizará un proceso **mientras** la condición propuesta sea
 
 ### Ejemplos
 
-* Imprimir el siguiente mensaje "Cuando el valor de inicio sea mayor a 5, detener operación" donde la variable "límite" es igual a 5 y la variable "inicio", 0.
+* Imprimir el siguiente mensaje "Cuando el valor de inicio sea mayor o igual a 5, detener operación" donde la variable "límite" es igual a 5 y la variable "inicio", 0.
 
 ```{r}
 limite <- 5

@@ -529,16 +529,16 @@ for (i in 1:10) {
 }
 ```
 
-    ## [1] 0.2920447
-    ## [1] 0.04997653
-    ## [1] 0.4445638
-    ## [1] 0.05284064
-    ## [1] 4.446289
-    ## [1] 2.910901
-    ## [1] 0.2442143
-    ## [1] 0.1951629
-    ## [1] 0.00381035
-    ## [1] 0.1692766
+    ## [1] 1.839074
+    ## [1] 0.3078004
+    ## [1] 0.8326882
+    ## [1] 0.192672
+    ## [1] 0.3896085
+    ## [1] 1.005272
+    ## [1] 0.07143514
+    ## [1] 0.3540672
+    ## [1] 0.0009563378
+    ## [1] 0.03973253
 
 ## 1.5 while
 
@@ -553,9 +553,9 @@ propuesta sea **verdadera**.
 
 ### 1.5.1 Ejemplos
 
--   Imprimir el siguiente mensaje “Cuando el valor de inicio sea mayor a
-    5, detener operación” donde la variable “límite” es igual a 5 y la
-    variable “inicio”, 0.
+-   Imprimir el siguiente mensaje “Cuando el valor de inicio sea mayor o
+    igual a 5, detener operación” donde la variable “límite” es igual a
+    5 y la variable “inicio”, 0.
 
 ``` r
 limite <- 5
