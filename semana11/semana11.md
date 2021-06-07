@@ -9,9 +9,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 # Solución Práctico 10
 
@@ -50,15 +48,41 @@ Dataframe pregunta 2:
   
 ## Pregunta 1:
 
-```{r}
+
+```r
 cangrejos <- read.csv("../semana8_9/datos/datos_cangrejos.txt")
 
 head(cangrejos)
+```
 
+```
+##   Year   Sector Month Sex C_Length
+## 1 2013 Sector_1    11   F   123.64
+## 2 2013 Sector_1    11   F   118.47
+## 3 2013 Sector_1    11   F   115.53
+## 4 2013 Sector_1    11   F   113.98
+## 5 2013 Sector_1    11   F   108.75
+## 6 2013 Sector_1    11   F   106.12
+```
+
+```r
 cangrejos$id1 <- paste(cangrejos$Year, 
                        cangrejos$Sector,
                        sep = " ")
 head(cangrejos)
+```
+
+```
+##   Year   Sector Month Sex C_Length           id1
+## 1 2013 Sector_1    11   F   123.64 2013 Sector_1
+## 2 2013 Sector_1    11   F   118.47 2013 Sector_1
+## 3 2013 Sector_1    11   F   115.53 2013 Sector_1
+## 4 2013 Sector_1    11   F   113.98 2013 Sector_1
+## 5 2013 Sector_1    11   F   108.75 2013 Sector_1
+## 6 2013 Sector_1    11   F   106.12 2013 Sector_1
+```
+
+```r
 etiqueta1 <- unique(cangrejos$id1)
 
 out <- 
@@ -91,13 +115,38 @@ for (i in seq_along(etiqueta1)) {
 
 
 mean(na.omit(datosFiltrados$C_Length))
+```
+
+```
+## [1] 127.95
+```
+
+```r
 mean(datosFiltrados$C_Length, na.rm = T)
 ```
 
+```
+## [1] 127.95
+```
 
-```{r}
+
+
+```r
 #Pregunta 2
 head(cangrejos)
+```
+
+```
+##   Year   Sector Month Sex C_Length           id1
+## 1 2013 Sector_1    11   F   123.64 2013 Sector_1
+## 2 2013 Sector_1    11   F   118.47 2013 Sector_1
+## 3 2013 Sector_1    11   F   115.53 2013 Sector_1
+## 4 2013 Sector_1    11   F   113.98 2013 Sector_1
+## 5 2013 Sector_1    11   F   108.75 2013 Sector_1
+## 6 2013 Sector_1    11   F   106.12 2013 Sector_1
+```
+
+```r
 #- Calcule los promedios mensuales de las tallas de los cangrejos (C_Length) para cada año para las hembras en condición "F" y "O".
 #Year
 #Month
@@ -138,8 +187,6 @@ for (i in seq_along(etiqueta2)) {
   out2 <- rbind(out2, promedio)
   
 }
-
-
 ```
 
 
