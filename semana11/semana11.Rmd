@@ -13,7 +13,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Solución Práctico 10
+### Solución Práctico 10
 
 Utilizando los datos de cangrejos (datos_cangrejo.txt):
 
@@ -48,98 +48,119 @@ Dataframe pregunta 2:
   - Columna 4 : Promedio talla condición O
   
   
-## Pregunta 1:
+#### Pregunta 1:
 
 ```{r}
+#Importando datos
 cangrejos <- read.csv("../semana8_9/datos/datos_cangrejos.txt")
+#cangrejos <- read.csv("semana8_9/datos/datos_cangrejos.txt")
 
 head(cangrejos)
 
-cangrejos$id1 <- paste(cangrejos$Year, 
-                       cangrejos$Sector,
-                       sep = " ")
-head(cangrejos)
+#Crear un identificador para el bucle
+cangrejos$id1 <- paste(cangrejos$Year, cangrejos$Sector, sep = " ")
+
 etiqueta1 <- unique(cangrejos$id1)
 
-out <- 
-  data.frame(
-  anio = NA,
-  promedio = NA
+#Crear un dataframe para indexar valores resultantes del bucle
+out1 <- data.frame(
+  etiqueta = NA,
+  promedio = NA,
+  n = NA
 )[-1,]
 
+#Inicio del bucle
 for (i in seq_along(etiqueta1)) {
   
+  #Filtra el dataframe en función al identificador
   datosFiltrados <- cangrejos[cangrejos$id1 == etiqueta1[i],]
+
+  #Determinar el Tamaño del dataframe filtrado
+  n_filtrado <- length(datosFiltrados$Year)
   
-  n_filtrado <- length(datosFiltrados$id1)
-  
+  #Inicia condición
   if (n_filtrado > 500) {
     
+    #Crea un dataframe donde incluye la etiqueta y el
+    #promedio si se cumple la condición propuesta
     promedio <- data.frame(
-      anio = etiqueta1[i],
-      promedio = mean(datosFiltrados$C_Length, na.rm = T))
+      etiqueta = etiqueta1[i],
+      promedio = mean(datosFiltrados$C_Length, na.rm = T),
+      n = n_filtrado)
     
   } else { 
     
-    promedio <- NA
+    #Crea un dataframe donde incluye la etiqueta y el
+    #promedio si no se cumple la condición propuesta
+    promedio <- data.frame(
+      etiqueta = etiqueta1[i],
+      promedio = NA,
+      n = n_filtrado)
     
     }
   
-  out <- rbind(out, promedio)
+  #Une los dataframe creados
+  out1 <- rbind(out1, promedio)
   
 }
 
-
-mean(na.omit(datosFiltrados$C_Length))
-mean(datosFiltrados$C_Length, na.rm = T)
+out1
 ```
 
+#### Pregunta 2:
 
 ```{r}
-#Pregunta 2
-head(cangrejos)
-#- Calcule los promedios mensuales de las tallas de los cangrejos (C_Length) para cada año para las hembras en condición "F" y "O".
-#Year
-#Month
-#Sex
 
-
+#Crear identificador para el bucle
 cangrejos$id2 <- paste(cangrejos$Year,
                        cangrejos$Month,
                        cangrejos$Sex)
 
 etiqueta2 <- unique(cangrejos$id2)
 
+#Crear un dataframe para indexar los valores resultantes del bucle
 out2 <- data.frame(
-  anio = NA,
-  promedio = NA
+  etiqueta = NA,
+  promedio = NA,
+  n_filtrado = NA
 )[-1,]
 
+#Inicio del bucle
 for (i in seq_along(etiqueta2)) {
   
-  datosF <- cangrejos[cangrejos$id2 == etiqueta2[i],]
+  #Filtra el dataframe en función al identificador
+  datosFiltrados <- cangrejos[cangrejos$id2 == etiqueta2[i],]
   
-  n <- length(datosF$Year)
+  #Determina el Tamaño del dataframe filtrado
+  n_filtrado <- length(datosFiltrados$Year)
   
-  if (n > 500) {
+  #Inicia condición
+  if (n_filtrado > 500) {
     
+    #Crea un dataframe donde incluye la etiqueta y el
+    #promedio si se cumple la condición propuesta
     promedio <- data.frame(
-      anio = etiqueta2[i],
-      promedio = mean(datosF$C_Length, na.rm = TRUE))
+      etiqueta = etiqueta2[i],
+      promedio = mean(datosFiltrados$C_Length, na.rm = TRUE),
+      n = n_filtrado)
     
   } else {
     
+    #Crea un dataframe donde incluye la etiqueta y el
+    #promedio si no se cumple la condición propuesta
      promedio <- data.frame(
-     anio = etiqueta2[i],
-     promedio = NA)
+     etiqueta = etiqueta2[i],
+     promedio = NA,
+     n = n_filtrado)
     
   }
   
+  #Une los dataframe creados
   out2 <- rbind(out2, promedio)
   
 }
 
-
+out2
 ```
 
 
