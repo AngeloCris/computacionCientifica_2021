@@ -1,4 +1,4 @@
-Untitled
+Funciones gráficas en r (paquete graphics and ggplot2)
 ================
 
-[hola](https://www.youtube.com/watch?v=fV4DiAyExN0)
+Funciones graficas
