@@ -499,8 +499,104 @@ for (n in 1:length(notas)) {
 
 
 ```{r}
-read.table("../")
 
+###########################SOLUCIÓN PRÁCTICO 10#############################
+################################PREGUNTA 1##################################
+library(tidyverse)
+datosCrangrejo <- 
+  read.table("datos/datos_cangrejos.txt",
+             sep = ",",
+             header = TRUE)
+
+datosCrangrejo$id1 <- paste(datosCrangrejo$Year, datosCrangrejo$Sector)
+id1Data <- unique(datosCrangrejo$id1)
+
+outs1 <- data.frame(id = NA,
+                     media = NA)[-1,]
+
+for (i in seq_along(id1Data) ) {
+  filtrada <- datosCrangrejo[datosCrangrejo$id1 == id1Data[i],]
+  promedio <- data.frame(id = id1Data[i],
+                     media = mean(filtrada$C_Length, na.rm = T),
+                     n = i)
+  outs1 <- rbind(outs1, promedio)
+}
+
+#PERO... AHORA LES PIDEN ALGO MÁS
+#Entonces, agregamos condicional:
+
+for (i in seq_along(id1Data) ) {
+  filtrada <- datosCrangrejo[datosCrangrejo$id1 == id1Data[i],]
+  total <- length(filtrada$Year)
+  if (total > 500) {
+     promedio <- data.frame(id = id1Data[i],
+                     media = mean(filtrada$C_Length, na.rm = T),
+                     n = i)
+  } else {
+    promedio <- data.frame(id = id1Data[i],
+                     media = 0,
+                     n = i)
+  }
+  outs1 <- rbind(outs1, promedio)
+}
+
+#DAR FORMATO
+outs1 %>% 
+  separate(id, c("anio", "sector"),
+           sep = " ") %>% 
+  pivot_wider(names_from = sector,
+              values_from = media) %>% 
+  select(-n) %>% 
+  arrange(anio)
+
+outs1 %>% 
+  arrange(id)
+
+datosCrangrejo %>% 
+  filter(id1 == "2014 Sector_1") %>% 
+  count()
+
+################################PREGUNTA 2##################################
+
+datosCrangrejo$id2 <- paste(datosCrangrejo$Year,
+                             datosCrangrejo$Month,
+                             datosCrangrejo$Sex)
+id2Data <- unique(datosCrangrejo$id2)
+outs2 <- data.frame(id = NA,
+                  media = NA)[-1,]
+
+#PRIMER PASO
+for (i in seq_along(id2Data)) {
+  datosFiltro <- datosCrangrejo[datosCrangrejo$id2 == id2Data[i],]
+  promedio <- data.frame(id = id2Data[i],
+                         media = mean(datosFiltro$C_Length, na.rm = T),
+                         n = i)
+  outs2 <- rbind(outs2, promedio)
+}
+
+#AGREGAMOS CONDICIONAL
+for (i in seq_along(id2Data)) {
+  datosFiltro <- datosCrangrejo[datosCrangrejo$id2 == id2Data[i],]
+  total <- length(datosFiltro$Year)
+  if (total > 500) {
+      promedio <- data.frame(id = id2Data[i],
+                         media = mean(datosFiltro$C_Length, na.rm = T),
+                         n = i)
+  } else {
+     promedio <- data.frame(id = id2Data[i],
+                         media = 0,
+                         n = i)
+  }
+     outs2 <- rbind(outs2, promedio)
+}
+
+outs2 %>% 
+  separate(id, c("anio","mes","sexo"), sep = " ") %>% 
+  select(-n) %>% 
+  pivot_wider(names_from = sexo,
+              values_from = media) %>% 
+  arrange(anio, mes)
+  
 
 ```
 
