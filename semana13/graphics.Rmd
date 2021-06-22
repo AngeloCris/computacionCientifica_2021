@@ -3,3 +3,4 @@ title: "Funciones gráficas en r (paquete graphics and ggplot2)"
 output: github_document
 ---
 
+Funciones graficas
