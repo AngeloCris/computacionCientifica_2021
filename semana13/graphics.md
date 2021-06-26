@@ -177,7 +177,7 @@ específico de acuerdo a las siguientes reglas:
 knitr::include_graphics("imagenes/tipoDatoPlot.PNG")
 ```
 
-<img src="imagenes/tipoDatoPlot.PNG" width="802" />
+![](imagenes/tipoDatoPlot.PNG)<!-- -->
 
 En donde los tipos de dato son:
 
@@ -189,3 +189,13 @@ Hay funciones que generan tipos específicos de gráficos como por ejemplo
 la función `barplot()` o `hist()`.
 
 ## Histogramas
+
+``` r
+library(ggplot2)
+library(tidyverse)
+mtcars %>% 
+  ggplot(aes(mpg, cyl)) +
+  geom_point()
+```
+
+![](graphics_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
