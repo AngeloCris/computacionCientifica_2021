@@ -71,9 +71,9 @@ Hay funciones que generan tipos específicos de gráficos como por ejemplo la fu
 ```{r}
 library(ggplot2)
 library(tidyverse)
-mtcars %>% 
+print(mtcars %>% 
   ggplot(aes(mpg, cyl)) +
-  geom_point()
+  geom_point())
 ```
 
 

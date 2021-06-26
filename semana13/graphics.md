@@ -193,9 +193,9 @@ la función `barplot()` o `hist()`.
 ``` r
 library(ggplot2)
 library(tidyverse)
-mtcars %>% 
+print(mtcars %>% 
   ggplot(aes(mpg, cyl)) +
-  geom_point()
+  geom_point())
 ```
 
 ![](graphics_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
