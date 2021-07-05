@@ -5,7 +5,7 @@ editor_options:
   chunk_output_type: inline
 ---
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
@@ -22,13 +22,16 @@ Para los ejemplos emplearemos la base de datos disponible en [UCI Machine Learni
 
 ```
 
-```{r}
+```{r results='hide'}
 readLines("bank.csv", n = 4)
 banco <- read.csv("bank.csv", sep = ";")
-head(banco)
 ```
 
 ```{r}
+head(banco)
+```
+
+```{r eval=FALSE}
 # #Cómo conocemos las dimensiones del dataframe?
 # dim(banco)
 # 
@@ -422,6 +425,7 @@ print(mtcars %>%
   ggplot(aes(mpg, cyl)) +
   geom_point())
 ```
+
 # FUNCIÓN `ggplot()`
 
 ```{r}
