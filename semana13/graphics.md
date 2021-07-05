@@ -69,10 +69,6 @@ Y** de la gráfica.
 Dependiendo del tipo de dato que sea `x` o `y` tendremos un gráfico
 específico de acuerdo a las siguientes reglas:
 
-``` r
-knitr::include_graphics("imagenes/tipoDatoPlot.PNG")
-```
-
 ![](imagenes/tipoDatoPlot.PNG)<!-- -->
 
 En donde los tipos de dato son:
@@ -130,10 +126,12 @@ función `plot()` con sus respectivos argumentos `x` e `y`.
 plot(x = banco$age, y = banco$balance, type = "p")
 ```
 
-![](graphics_files/figure-gfm/unnamed-chunk-8-1.png)<!-- --> Tenemos
-valores extremos que no permiten visualizar correctamente la mayor
-cantidad de nuestros datos. Entonces, para fine de tener una gráfica más
-informativa, vamos a cambiar todos los valores mayores a 15000.
+![](graphics_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+Tenemos valores extremos que no permiten visualizar correctamente la
+mayor cantidad de nuestros datos. Entonces, para fine de tener una
+gráfica más informativa, vamos a cambiar todos los valores mayores a
+15000.
 
 estos valores para tener una mejor visualización.
 
@@ -151,9 +149,10 @@ plot(x = banco$age,
 plot(x = banco$age, y = banco$balance, col = as.factor(banco$loan))
 ```
 
-![](graphics_files/figure-gfm/unnamed-chunk-10-1.png)<!-- --> Sabemos
-que los niveles de loan son “no” y “yes”, además que los colores han
-sido rojo y negro pero sería de utilidad para el lector agregar una
+![](graphics_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+Sabemos que los niveles de loan son “no” y “yes”, además que los colores
+han sido rojo y negro pero sería de utilidad para el lector agregar una
 leyenda que explique explícitamente los colores.
 
 ``` r
@@ -247,12 +246,12 @@ head(data.frame(x,y0,y1,y2))
 ```
 
     ##   x       y0         y1        y2
-    ## 1 1 5.152539  0.4124913 -4.126488
-    ## 2 2 3.317805 -1.6208814 -6.953001
-    ## 3 3 4.880123  0.4455701 -6.107534
-    ## 4 4 6.212784  0.9144567 -6.199154
-    ## 5 5 4.674477  0.7307022 -5.331499
-    ## 6 6 6.470402  0.3063910 -3.838744
+    ## 1 1 1.950908 -1.5606853 -4.247981
+    ## 2 2 5.494606  2.0158428 -4.702494
+    ## 3 3 4.240411  0.3000087 -5.161518
+    ## 4 4 5.634687 -0.2680283 -5.131764
+    ## 5 5 6.332696 -0.7100338 -2.551813
+    ## 6 6 4.019763 -0.9352834 -4.550759
 
 ``` r
 plot(c(-1,50),
@@ -390,7 +389,7 @@ Cada una de estas funciones tiene los siguientes argumentos:
 ejemplo:
 
 ``` r
-png(filename = "../semana13/graficosTodos")
+png(filename = "../semana13/loan_age")
 plot(x = banco$age,
      y = banco$duration,
      col = as.factor(banco$loan),
@@ -501,29 +500,4 @@ dev.off()
 file.show("graficosTodos")
 ```
 
-``` r
-library(ggplot2)
-library(tidyverse)
-print(mtcars %>% 
-  ggplot(aes(mpg, cyl)) +
-  geom_point())
-```
-
-![](graphics_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
-
 # FUNCIÓN `ggplot()`
-
-``` r
-library(ggplot2)
-library(tidyverse)
-iris %>% 
-  ggplot(aes(x = Petal.Length,
-             y = Petal.Width)) +
-  geom_point(aes(col = Species)) +
-  labs(title = "Iris - Petalo",
-       x = "Largo",
-       y = "Ancho") +
-  theme_bw()
-```
-
-![](graphics_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
